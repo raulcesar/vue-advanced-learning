@@ -6,7 +6,7 @@
             </div>
 
             <i>{{objectifiedQuote.author}}</i>
-
+            <i>{{index}}</i>
         </div>
     </div>
 </template>
@@ -15,7 +15,7 @@
     import { eventBus } from '../main';
 
     export default {
-        props: ['quote'],
+        props: ['quote', 'index'],
         computed: {
             objectifiedQuote: function () {
                 if (!this.quote.text) {

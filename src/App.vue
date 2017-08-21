@@ -1,12 +1,13 @@
 <template>
   <div id="app">
-    <app-quote-counter :quotes="quotes"></app-quote-counter>
+    <app-quote-counter :quotes="quotes" :max="maxQuotes"></app-quote-counter>
     <app-quote-input @newQuote="addQuote"></app-quote-input>
     <app-quote-list :quotes="quotes"></app-quote-list>
   </div>
 </template>
 
 <script>
+  import { eventBus } from './main';
   import QuoteCounter from './components/QuoteCounter.vue';
   import QuoteInput from './components/QuoteInput.vue';
   import QuoteList from './components/QuoteList.vue';
@@ -25,8 +26,16 @@
         maxQuotes: 10
       }
     },
+    
+    created() {
+      eventBus.$on('quoteClicked', quote => {
+        let i = this.quotes.indexOf(quote);
+        this.quotes.splice(i, 1);
+      })
+    },
+
     methods: {
-      addQuote: function(quote) {
+      addQuote: function (quote) {
         if (this.quotes.length >= this.maxQuotes) {
           this.quotes.splice(0, 1);
         }
