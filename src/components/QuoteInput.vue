@@ -1,16 +1,44 @@
 <template>
-    <div class="row">
-        <form>
-            <div class="col-sm-8 col-sm-offset-2 form-group">
-                <label for="idTextQuote">Quote</label>
-                <textarea class="form-control" name="Quote Text" id="idTextQuote" rows="3" v-model="quote" ref="quoteInput"></textarea>
+    <div>
+        <div class="row">
+            <form>
+                <div class="col-sm-8 col-sm-offset-2 form-group">
+                    <label for="idTextQuote">Quote</label>
+                    <textarea class="form-control"
+                              name="Quote Text"
+                              id="idTextQuote"
+                              rows="3"
+                              v-model.lazy="quote"
+                              ref="quoteInput"></textarea>
+                </div>
+                <div class="col-sm-8 col-sm-offset-2">
+                    <label for="idQuoteType">Type</label>
+                    <select name="quoteType"
+                            id="idQuoteType"
+                            class="form-control"
+                            v-model="selectedType">
+                        <option v-for="type in types"
+                                :key="type"
+                                :selected="type === 'Normal'">{{type}}</option>
+                        <!-- <option v-for="type in types"                                :key="type"                                :selected="type === 'Normal'">{{type}}</option> -->
+
+                    </select>
+                </div>
+
+                <div class="col-sm-8 col-sm-offset-2 form-group">
+                    <button class="btn btn-primary"
+                            @click.prevent="addQuote">
+                        Add Quote
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                {{quote}} -> {{selectedType}}
             </div>
-            <div class="col-sm-8 col-sm-offset-2 form-group">
-                <button class="btn btn-primary" @click.prevent="addQuote">
-                    Add Quote
-                </button>
-            </div>
-        </form>
+        </div>
+
     </div>
 </template>
 
@@ -20,7 +48,9 @@
     export default {
         data: function () {
             return {
-                quote: ''
+                quote: '',
+                types: ['Normal', 'Copied', 'Unknown'],
+                selectedType: ''
             }
         },
         methods: {
