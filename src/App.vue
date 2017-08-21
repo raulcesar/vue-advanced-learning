@@ -12,8 +12,12 @@
   import QuoteInput from './components/QuoteInput.vue';
   import QuoteList from './components/QuoteList.vue';
 
+  
+
+
   export default {
     name: 'app',
+
     components: {
       appQuoteCounter: QuoteCounter,
       appQuoteInput: QuoteInput,
@@ -26,12 +30,14 @@
         maxQuotes: 10
       }
     },
-    
+
     created() {
       eventBus.$on('quoteClicked', quote => {
         let i = this.quotes.indexOf(quote);
         this.quotes.splice(i, 1);
       })
+      
+      // console.log(`eventBus: ${eventBus.test()}`)
     },
 
     methods: {
