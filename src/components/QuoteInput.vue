@@ -35,7 +35,11 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                {{quote}} -> {{selectedType}}
+                <cust-input v-model="dataSwitch"></cust-input>
+            </div>
+            
+            <div class="col-sm-12">
+                {{quote}} -> {{selectedType}} => {{dataSwitch}}
             </div>
         </div>
 
@@ -44,13 +48,18 @@
 
 <script>
     import { eventBus } from '../main';
+    import CustomInput from './customInput.vue';
 
     export default {
+        components: {
+            custInput: CustomInput
+        },
         data: function () {
             return {
                 quote: '',
                 types: ['Normal', 'Copied', 'Unknown'],
-                selectedType: ''
+                selectedType: '',
+                dataSwitch: true
             }
         },
         methods: {
